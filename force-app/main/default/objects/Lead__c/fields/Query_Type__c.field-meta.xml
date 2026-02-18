@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Query_Type__c</fullName>
+    <label>Query Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Direct</fullName>
+                <default>false</default>
+                <label>Direct</label>
+            </value>
+            <value>
+                <fullName>Buy-Leads</fullName>
+                <default>false</default>
+                <label>Buy-Leads</label>
+            </value>
+            <value>
+                <fullName>PNS Calls</fullName>
+                <default>false</default>
+                <label>PNS Calls</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
