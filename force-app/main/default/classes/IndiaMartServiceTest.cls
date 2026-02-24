@@ -1,6 +1,5 @@
 /**
  * @description       : Comprehensive Test Class for IndiaMartService.
- * Targets 100% code coverage by hitting all logical branches and error handlers.
  * @author            : Aryan Sahu
  * @last modified on  : 2026-02-24
 **/
