@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Address_Required_at_Nurturing_Stage</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Lead_Status__c, &quot;Nurturing&quot;),
+  OR(
+    ISBLANK(Location__c),
+    ISBLANK(
+      TRIM(
+        Address__Street__s &amp;
+        Address__City__s &amp;
+        TEXT(Address__StateCode__s) &amp;
+        TEXT(Address__CountryCode__s) &amp;
+        Address__PostalCode__s
+      )
+    )
+  )
+)</errorConditionFormula>
+    <errorMessage>Address and Location are Mandatory at Nurturing Status</errorMessage>
+</ValidationRule>

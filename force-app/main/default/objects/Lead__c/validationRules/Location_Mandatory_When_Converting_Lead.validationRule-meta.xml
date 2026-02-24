@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location_Mandatory_When_Converting_Lead</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Lead_Status__c , &quot;Converted&quot;),
+    ISBLANK(Location__c),
+    ISCHANGED(Lead_Status__c)
+)</errorConditionFormula>
+    <errorMessage>Location is mandatory when converting a Lead. Please populate Location before changing status to Converted.</errorMessage>
+</ValidationRule>

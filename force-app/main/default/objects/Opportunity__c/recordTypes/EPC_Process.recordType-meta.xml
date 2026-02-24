@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPC_Process</fullName>
+    <active>true</active>
+    <label>EPC Process</label>
+    <picklistValues>
+        <picklist>Approval_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Unit__c</picklist>
+        <values>
+            <fullName>Protection Solution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Substation Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Test %26 Measurement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_Status__c</picklist>
+        <values>
+            <fullName>Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lead_Source__c</picklist>
+        <values>
+            <fullName>Apollo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IndiaMart</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LinkedIn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Palladium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade India</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web-to-Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website %E2%80%93 Company Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Project__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>EPC REQ Prep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPC Tender Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indent Pending</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Offer Preparation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Award to EPC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Potential</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Projected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

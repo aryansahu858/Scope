@@ -1,0 +1,500 @@
+<!--
+    @component     leadConverter
+    @description   Conversion modal template. Mirrors the layout of Salesforce's
+                   standard Lead conversion dialog with three collapsible sections:
+                   Account, Contact, and Opportunity.
+
+                   Each section provides two modes toggled by a radio button group:
+                     • "Create New"      — renders name/detail input fields.
+                     • "Select Existing" — renders a type-ahead search combobox.
+                       Once a record is chosen, the combobox is replaced with an
+                       SLDS pill showing the selected record name and a remove button.
+
+                   The entire modal is conditionally rendered via isModalOpen so that
+                   no DOM is created until the conversion flow is actually triggered.
+-->
+<template>
+    <!-- Outer guard: nothing is rendered until openModal() sets isModalOpen = true -->
+    <template if:true={isModalOpen}>
+
+        <!--
+            slds-modal_medium gives the dialog a comfortable width for three
+            form sections. aria-modal and aria-label satisfy accessibility requirements.
+        -->
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            aria-label="Convert Lead"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+
+            <div class="slds-modal__container">
+
+                <!-- ═══════════════════════════════════════════════════════════
+                     HEADER
+                     slds-modal__close is absolutely positioned by SLDS at the
+                     top-right corner of the header. slds-button_icon-inverse
+                     ensures the × icon is white and clearly visible on the
+                     dark modal header background.
+                ════════════════════════════════════════════════════════════ -->
+                <header class="slds-modal__header">
+                    <button
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close"
+                        onclick={closeModal}>
+                        <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text="Close"
+                            variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+
+                    <h2 id="modal-heading" class="slds-modal__title slds-has-flexi-truncate">
+                        Convert Lead
+                    </h2>
+                </header>
+
+                <!-- ═══════════════════════════════════════════════════════════
+                     BODY
+                     Scrollable content area. slds-p-around_medium provides
+                     consistent internal padding matching SLDS dialog standards.
+                ════════════════════════════════════════════════════════════ -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content">
+
+                    <!-- ── Inline Error Banner ────────────────────────────────
+                         Shown when validateInputs() or the Apex call returns
+                         an error. Cleared at the start of each conversion attempt.
+                    ──────────────────────────────────────────────────────── -->
+                    <template if:true={errorMessage}>
+                        <div
+                            class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-m-bottom_medium"
+                            role="alert">
+                            <span class="slds-assistive-text">Error</span>
+                            {errorMessage}
+                        </div>
+                    </template>
+
+
+                    <!-- ═══════════════════════════════════════════════════════
+                         SECTION 1 — ACCOUNT
+                         Allows the user to either create a new Account or link
+                         the Lead to an existing one via type-ahead search.
+                    ════════════════════════════════════════════════════════ -->
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Account">Account</span>
+                        </h3>
+
+                        <div class="slds-section__content slds-p-around_medium">
+
+                            <!-- Toggle: "Create New" / "Select Existing" -->
+                            <lightning-radio-group
+                                name="accountOption"
+                                label="Account"
+                                variant="label-hidden"
+                                options={options}
+                                value={selectedAccountOption}
+                                onchange={handleAccountOptionChange}
+                                type="button"
+                                class="slds-m-bottom_small">
+                            </lightning-radio-group>
+
+                            <!-- ── Create New Account ─────────────────────── -->
+                            <template if:true={isCreateAccount}>
+                                <lightning-input
+                                    label="Account Name"
+                                    required
+                                    value={accountName}
+                                    onchange={handleInputChange}
+                                    data-id="accName">
+                                </lightning-input>
+                            </template>
+
+                            <!-- ── Select Existing Account ───────────────────
+                                 Two sub-states controlled by existingAccountId:
+                                   • No selection → show the search combobox.
+                                   • Selection made → replace combobox with a pill.
+                            ──────────────────────────────────────────────── -->
+                            <template if:false={isCreateAccount}>
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        <abbr class="slds-required" title="required">*</abbr>Account Name
+                                    </label>
+                                    <div class="slds-form-element__control">
+
+                                        <!-- SELECTED STATE: SLDS pill replaces the search input.
+                                             The × button calls clearAccount() to reset the selection. -->
+                                        <template if:true={existingAccountId}>
+                                            <div class="slds-pill_container">
+                                                <ul
+                                                    class="slds-listbox slds-listbox_horizontal"
+                                                    role="listbox"
+                                                    aria-label="Selected Account">
+                                                    <li class="slds-listbox__item" role="presentation">
+                                                        <span class="slds-pill slds-pill_link" role="option">
+                                                            <span class="slds-pill__icon_container">
+                                                                <lightning-icon
+                                                                    icon-name="standard:account"
+                                                                    size="x-small"
+                                                                    alternative-text="Account">
+                                                                </lightning-icon>
+                                                            </span>
+                                                            <a class="slds-pill__action" title={selectedAccountName} tabindex="0">
+                                                                <span class="slds-pill__label">{selectedAccountName}</span>
+                                                            </a>
+                                                            <button
+                                                                class="slds-button slds-button_icon slds-pill__remove"
+                                                                title="Remove Account"
+                                                                onclick={clearAccount}>
+                                                                <lightning-icon
+                                                                    icon-name="utility:close"
+                                                                    size="x-small"
+                                                                    alternative-text="Remove">
+                                                                </lightning-icon>
+                                                                <span class="slds-assistive-text">Remove {selectedAccountName}</span>
+                                                            </button>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </template>
+
+                                        <!-- SEARCH STATE: type-ahead combobox.
+                                             accDropdownClass toggles slds-is-open when results exist.
+                                             Clicking a result calls selectAccount(), which sets
+                                             existingAccountId and swaps this block for the pill above. -->
+                                        <template if:false={existingAccountId}>
+                                            <div class="slds-combobox_container">
+                                                <div
+                                                    class={accDropdownClass}
+                                                    aria-expanded={isAccDropdownOpen}
+                                                    aria-haspopup="listbox"
+                                                    role="combobox">
+
+                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                        <input
+                                                            type="text"
+                                                            class="slds-input slds-combobox__input"
+                                                            id="acc-search"
+                                                            autocomplete="off"
+                                                            placeholder="Search accounts..."
+                                                            value={selectedAccountName}
+                                                            onkeyup={handleAccountSearchKeyChange}/>
+                                                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                            <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
+                                                        </span>
+                                                    </div>
+
+                                                    <!-- Search results dropdown -->
+                                                    <div
+                                                        id="acc-listbox"
+                                                        role="listbox"
+                                                        class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                            <template for:each={accSearchResults} for:item="acc">
+                                                                <li
+                                                                    key={acc.Id}
+                                                                    role="presentation"
+                                                                    class="slds-listbox__item"
+                                                                    onclick={selectAccount}
+                                                                    data-id={acc.Id}
+                                                                    data-name={acc.Name}>
+                                                                    <span
+                                                                        id={acc.Id}
+                                                                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                        role="option">
+                                                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                                                            <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                                                                        </span>
+                                                                        <span class="slds-media__body">
+                                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{acc.Name}</span>
+                                                                        </span>
+                                                                    </span>
+                                                                </li>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                    </div>
+                                </div>
+                            </template>
+
+                        </div>
+                    </div>
+
+                    <hr class="slds-m-vertical_x-small" style="border-color: #dddbda;" />
+
+
+                    <!-- ═══════════════════════════════════════════════════════
+                         SECTION 2 — CONTACT
+                         Mirrors the Account section pattern. The user can create
+                         a new Contact (first + last name) or link to an existing
+                         Contact via type-ahead search. The search results also
+                         display the Contact's parent Account name as sub-text.
+                    ════════════════════════════════════════════════════════ -->
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Contact">Contact</span>
+                        </h3>
+
+                        <div class="slds-section__content slds-p-around_medium">
+
+                            <!-- Toggle: "Create New" / "Select Existing" -->
+                            <lightning-radio-group
+                                name="contactOption"
+                                label="Contact"
+                                variant="label-hidden"
+                                options={options}
+                                value={selectedContactOption}
+                                onchange={handleContactOptionChange}
+                                type="button"
+                                class="slds-m-bottom_small">
+                            </lightning-radio-group>
+
+                            <!-- ── Create New Contact ─────────────────────── -->
+                            <template if:true={isCreateContact}>
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <lightning-input
+                                            label="First Name"
+                                            value={contactFirstName}
+                                            onchange={handleInputChange}
+                                            data-id="conFirst">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col">
+                                        <lightning-input
+                                            label="Last Name"
+                                            required
+                                            value={contactLastName}
+                                            onchange={handleInputChange}
+                                            data-id="conLast">
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- ── Select Existing Contact ───────────────────
+                                 Same pill / combobox pattern as the Account section.
+                            ──────────────────────────────────────────────── -->
+                            <template if:false={isCreateContact}>
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        <abbr class="slds-required" title="required">*</abbr>Contact Name
+                                    </label>
+                                    <div class="slds-form-element__control">
+
+                                        <!-- SELECTED STATE: pill with remove button -->
+                                        <template if:true={existingContactId}>
+                                            <div class="slds-pill_container">
+                                                <ul
+                                                    class="slds-listbox slds-listbox_horizontal"
+                                                    role="listbox"
+                                                    aria-label="Selected Contact">
+                                                    <li class="slds-listbox__item" role="presentation">
+                                                        <span class="slds-pill slds-pill_link" role="option">
+                                                            <span class="slds-pill__icon_container">
+                                                                <lightning-icon
+                                                                    icon-name="standard:contact"
+                                                                    size="x-small"
+                                                                    alternative-text="Contact">
+                                                                </lightning-icon>
+                                                            </span>
+                                                            <a class="slds-pill__action" title={selectedContactName} tabindex="0">
+                                                                <span class="slds-pill__label">{selectedContactName}</span>
+                                                            </a>
+                                                            <button
+                                                                class="slds-button slds-button_icon slds-pill__remove"
+                                                                title="Remove Contact"
+                                                                onclick={clearContact}>
+                                                                <lightning-icon
+                                                                    icon-name="utility:close"
+                                                                    size="x-small"
+                                                                    alternative-text="Remove">
+                                                                </lightning-icon>
+                                                                <span class="slds-assistive-text">Remove {selectedContactName}</span>
+                                                            </button>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </template>
+
+                                        <!-- SEARCH STATE: type-ahead combobox with sub-text for Account name -->
+                                        <template if:false={existingContactId}>
+                                            <div class="slds-combobox_container">
+                                                <div
+                                                    class={conDropdownClass}
+                                                    aria-expanded={isConDropdownOpen}
+                                                    aria-haspopup="listbox"
+                                                    role="combobox">
+
+                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                        <input
+                                                            type="text"
+                                                            class="slds-input slds-combobox__input"
+                                                            id="con-search"
+                                                            autocomplete="off"
+                                                            placeholder="Search contacts..."
+                                                            value={selectedContactName}
+                                                            onkeyup={handleContactSearchKeyChange}/>
+                                                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                            <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
+                                                        </span>
+                                                    </div>
+
+                                                    <!-- Search results dropdown.
+                                                         slds-listbox__option_has-meta enables the two-line
+                                                         layout so the parent Account name renders as sub-text. -->
+                                                    <div
+                                                        id="con-listbox"
+                                                        role="listbox"
+                                                        class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                            <template for:each={conSearchResults} for:item="con">
+                                                                <li
+                                                                    key={con.Id}
+                                                                    role="presentation"
+                                                                    class="slds-listbox__item"
+                                                                    onclick={selectContact}
+                                                                    data-id={con.Id}
+                                                                    data-name={con.Name}>
+                                                                    <span
+                                                                        id={con.Id}
+                                                                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                        role="option">
+                                                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                                                            <lightning-icon icon-name="standard:contact" size="small"></lightning-icon>
+                                                                        </span>
+                                                                        <span class="slds-media__body">
+                                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{con.Name}</span>
+                                                                            <!-- Show parent Account name as secondary meta text if available -->
+                                                                            <template if:true={con.Account}>
+                                                                                <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{con.Account.Name}</span>
+                                                                            </template>
+                                                                        </span>
+                                                                    </span>
+                                                                </li>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                    </div>
+                                </div>
+                            </template>
+
+                        </div>
+                    </div>
+
+                    <hr class="slds-m-vertical_x-small" style="border-color: #dddbda;" />
+
+
+                    <!-- ═══════════════════════════════════════════════════════
+                         SECTION 3 — OPPORTUNITY
+                         Optional section. The checkbox at the top allows the user
+                         to skip Opportunity creation entirely. When unchecked,
+                         the name, close date, and stage fields are shown.
+                    ════════════════════════════════════════════════════════ -->
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Opportunity">Opportunity</span>
+                        </h3>
+
+                        <div class="slds-section__content slds-p-around_medium">
+
+                            <!-- Opt-out checkbox: when checked, hides the Opportunity fields
+                                 and sets doNotCreateOpp = true in the conversion payload. -->
+                            <lightning-input
+                                type="checkbox"
+                                label="Do not create an opportunity upon conversion"
+                                checked={doNotCreateOpp}
+                                onchange={handleOppCheckboxChange}
+                                class="slds-m-bottom_small">
+                            </lightning-input>
+
+                            <!-- Opportunity fields — hidden when doNotCreateOpp is true -->
+                            <template if:false={doNotCreateOpp}>
+
+                                <lightning-input
+                                    label="Opportunity Name"
+                                    required
+                                    value={oppName}
+                                    onchange={handleInputChange}
+                                    data-id="oppName"
+                                    class="slds-m-top_small">
+                                </lightning-input>
+
+                                <div class="slds-grid slds-gutters slds-m-top_small">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <!-- Defaults to 30 days from today (set in openModal()) -->
+                                        <lightning-input
+                                            type="date"
+                                            label="Close Date"
+                                            required
+                                            value={oppCloseDate}
+                                            onchange={handleInputChange}
+                                            data-id="oppDate">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <!-- Defaults to 'Prospecting' (set as class property) -->
+                                        <lightning-combobox
+                                            label="Stage"
+                                            required
+                                            value={oppStage}
+                                            options={stageOptions}
+                                            onchange={handleInputChange}
+                                            data-id="oppStage">
+                                        </lightning-combobox>
+                                    </div>
+                                </div>
+
+                            </template>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end modal body -->
+
+
+                <!-- ═══════════════════════════════════════════════════════════
+                     FOOTER
+                     Cancel triggers closeModal() which reverts the Lead status
+                     if the conversion was not completed. Convert triggers
+                     handleConvert() which validates inputs and calls Apex.
+                ════════════════════════════════════════════════════════════ -->
+                <footer class="slds-modal__footer">
+                    <lightning-button
+                        label="Cancel"
+                        title="Cancel conversion and revert Lead status"
+                        onclick={closeModal}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+                    <lightning-button
+                        variant="brand"
+                        label="Convert"
+                        title="Convert Lead"
+                        onclick={handleConvert}
+                        disabled={isProcessing}>
+                    </lightning-button>
+                </footer>
+
+            </div>
+        </section>
+
+        <!-- SLDS backdrop dims the page behind the modal -->
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+</template>

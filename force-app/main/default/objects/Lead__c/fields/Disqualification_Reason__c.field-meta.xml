@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disqualification_Reason__c</fullName>
+    <label>Disqualification Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+                <label>Not Interested</label>
+            </value>
+            <value>
+                <fullName>Budget Not Available</fullName>
+                <default>false</default>
+                <label>Budget Not Available</label>
+            </value>
+            <value>
+                <fullName>Requirement Not Clear</fullName>
+                <default>false</default>
+                <label>Requirement Not Clear</label>
+            </value>
+            <value>
+                <fullName>Out of Scope</fullName>
+                <default>false</default>
+                <label>Out of Scope</label>
+            </value>
+            <value>
+                <fullName>Duplicate Lead</fullName>
+                <default>false</default>
+                <label>Duplicate Lead</label>
+            </value>
+            <value>
+                <fullName>Invalid Contact Details</fullName>
+                <default>false</default>
+                <label>Invalid Contact Details</label>
+            </value>
+            <value>
+                <fullName>Competitor Finalized</fullName>
+                <default>false</default>
+                <label>Competitor Finalized</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

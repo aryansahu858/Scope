@@ -141,6 +141,7 @@ public class IndiaMartService implements Queueable, Database.AllowsCallouts {
     * @return Lead__c The populated Salesforce record
     */
     private static Lead__c mapToLead(IndiaMartResponseWrapper.LeadDetail item) {
+    
         Lead__c ld = new Lead__c();
         ld.Lead_External_Id__c = item.UNIQUE_QUERY_ID; 
         ld.Name = item.SENDER_NAME;
@@ -148,12 +149,56 @@ public class IndiaMartService implements Queueable, Database.AllowsCallouts {
         ld.Email__c = item.SENDER_EMAIL;
         ld.Company__c = item.SENDER_COMPANY;
         ld.Subject__c = item.SUBJECT;
-        ld.City__c = item.SENDER_CITY;
-        ld.State_Province__c = item.SENDER_STATE;
-        ld.Zip_Postal_Code__c = item.SENDER_PINCODE;
-        ld.Country__c = item.SENDER_COUNTRY_ISO;
         ld.Product_Interest__c = item.QUERY_PRODUCT_NAME;
         ld.Product_Category__c = item.QUERY_MCAT_NAME;
+        ld.Lead_Source__c = 'IndiaMart';
+
+        Map<String, Schema.PicklistEntry> countryMap = new Map<String, Schema.PicklistEntry>();
+        for (Schema.PicklistEntry ple : Lead__c.Address__CountryCode__s.getDescribe().getPicklistValues()) {
+            countryMap.put(ple.getValue().toUpperCase(), ple);
+        }
+
+        Map<String, Schema.PicklistEntry> stateMap = new Map<String, Schema.PicklistEntry>();
+        for (Schema.PicklistEntry ple : Lead__c.Address__StateCode__s.getDescribe().getPicklistValues()) {
+            stateMap.put(ple.getValue().toUpperCase(), ple);
+        }
+
+        String incomingCountry = item.SENDER_COUNTRY_ISO != null 
+            ? item.SENDER_COUNTRY_ISO.trim().toUpperCase()
+            : null;
+
+        String incomingState = item.SENDER_STATE != null
+            ? item.SENDER_STATE.trim().toUpperCase()
+            : null;
+
+        Boolean validCountry = incomingCountry != null && countryMap.containsKey(incomingCountry);
+        Boolean validState   = incomingState != null && stateMap.containsKey(incomingState);
+
+        if (validCountry) {
+            ld.Address__CountryCode__s = incomingCountry;
+
+            if (validState) {
+                ld.Address__StateCode__s = incomingState;
+            }
+
+            ld.Address__City__s = item.SENDER_CITY;
+            ld.Address__PostalCode__s = item.SENDER_PINCODE;
+
+        } else {
+
+            List<String> addressParts = new List<String>();
+            
+            if (String.isNotBlank(item.SENDER_CITY))
+                addressParts.add(item.SENDER_CITY);
+            if (String.isNotBlank(item.SENDER_STATE))
+                addressParts.add(item.SENDER_STATE);
+            if (String.isNotBlank(item.SENDER_PINCODE))
+                addressParts.add(item.SENDER_PINCODE);
+            if (String.isNotBlank(item.SENDER_COUNTRY_ISO))
+                addressParts.add(item.SENDER_COUNTRY_ISO);
+
+            ld.Address__City__s = String.join(addressParts, ', ');
+        }
         
         // Transform Single Character Codes to Readable Labels
         if (String.isNotBlank(item.QUERY_TYPE)) {

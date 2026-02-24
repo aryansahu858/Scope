@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Required_at_Lead_Conversion</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Lead_Status__c, &quot;Converted&quot;),
+  ISCHANGED(Lead_Status__c),
+  ISBLANK( Email__c )
+)</errorConditionFormula>
+    <errorMessage>Email is required before converting the Lead. Please enter an email address to proceed.</errorMessage>
+</ValidationRule>
