@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_BU__c</fullName>
+    <label>Product BU</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Test &amp; Measurement</fullName>
+                <default>false</default>
+                <label>Test &amp; Measurement</label>
+            </value>
+            <value>
+                <fullName>Protection &amp; Automation</fullName>
+                <default>false</default>
+                <label>Protection &amp; Automation</label>
+            </value>
+            <value>
+                <fullName>ISSPL</fullName>
+                <default>false</default>
+                <label>ISSPL</label>
+            </value>
+            <value>
+                <fullName>Protection Solution</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Protection Solution</label>
+            </value>
+            <value>
+                <fullName>Substation Services</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Substation Services</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
