@@ -1,0 +1,136 @@
+<apex:page standardController="Quote__c" extensions="QuotePdfController" renderAs="pdf" applyBodyTag="false" showHeader="false" sidebar="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: letter;
+                margin-top: 140px;
+                margin-bottom: 80px;
+                margin-left: 0.5in;
+                margin-right: 0.5in;
+                @top-center { content: element(header); }
+                @bottom-center { content: element(footer); }
+            }
+            body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 10pt; color: #333; margin: 0; padding: 0; }
+            div.header { position: running(header); width: 100%; }
+            div.footer { position: running(footer); font-size: 8pt; color: #777; text-align: center; border-top: 1px solid #ddd; padding-top: 5px; }
+            .layout-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            .layout-table td { vertical-align: top; }
+            .data-table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+            .data-table th, .data-table td { border: 1px solid #ddd; padding: 8px; }
+            .data-table th { background-color: #f4f6f9; font-weight: bold; text-align: left; color: #000; }
+            .data-table tr { page-break-inside: avoid; }
+            .data-table tr:nth-child(even) { background-color: #fafafa; }
+            .text-right { text-align: right !important; }
+            .text-center { text-align: center !important; }
+            .text-bold { font-weight: bold; }
+            .section-title { font-size: 14pt; color: #F58220; margin-bottom: 5px; border-bottom: 1px solid #ccc; padding-bottom: 3px; margin-top: 10px; }
+            .meta-label { font-weight: bold; padding-right: 10px; color: #555; }
+            .totals-table { margin-top: 15px; width: 350px; border-collapse: collapse; }
+            .totals-table td { padding: 6px; border-bottom: 1px solid #eee; }
+            .totals-table tr:last-child td { border-bottom: none; border-top: 2px solid #333; }
+            .signature-block { margin-top: 50px; page-break-inside: avoid; }
+            .sig-line { border-bottom: 1px solid #000; display: inline-block; width: 250px; margin-bottom: 5px;}
+        </style>
+    </head>
+    
+    <body>
+        <div class="header">
+            <h1 style="margin:0; font-size:16pt; color:#F58220;">{!companyName}</h1>
+        </div>
+
+        <div class="footer">
+            {!companyName}
+            <apex:outputPanel rendered="{!NOT(ISBLANK(companyAddress))}" layout="none">
+                | <apex:outputText value="{!companyAddress}" escape="false"/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISBLANK(companyPhone))}" layout="none">
+                | Phone: {!companyPhone}
+            </apex:outputPanel>
+        </div>
+
+        <div class="section-title">Quote Summary</div>
+        <table class="layout-table">
+            <tr>
+                <td width="50%">
+                    <table>
+                        <tr><td class="meta-label">Quote Number:</td><td>{!quote.Name}</td></tr>
+                        <tr><td class="meta-label">Created Date:</td><td><apex:outputText value="{0,date,MMM d, yyyy}"><apex:param value="{!quote.CreatedDate}"/></apex:outputText></td></tr>
+                        <tr><td class="meta-label">Expiration Date:</td><td><apex:outputText value="{0,date,MMM d, yyyy}"><apex:param value="{!quote.Expiration_Date__c}"/></apex:outputText></td></tr>
+                    </table>
+                    
+                    <div style="margin-top: 15px;">
+                        <span class="meta-label">Bill To:</span><br/>
+                        <apex:outputText value="{!quote.Bill_To_Name__c}" rendered="{!NOT(ISBLANK(quote.Bill_To_Name__c))}"/><br rendered="{!NOT(ISBLANK(quote.Bill_To_Name__c))}"/>
+                        <apex:outputText value="{!formattedBillTo}" escape="false"/>
+                    </div>
+                </td>
+                <td width="50%">
+                    <table>
+                        <tr><td class="meta-label">Prepared By:</td><td>{!quote.CreatedBy.Name}</td></tr>
+                        <tr><td class="meta-label">Email:</td><td>{!quote.CreatedBy.Email}</td></tr>
+                        <tr><td class="meta-label">Contact Name:</td><td>{!quote.Contact_Name__c}</td></tr>
+                        <tr><td class="meta-label">Phone:</td><td>{!quote.Phone__c}</td></tr>
+                        <tr><td class="meta-label">Fax:</td><td>{!quote.Fax__c}</td></tr>
+                    </table>
+                    
+                    <div style="margin-top: 15px;">
+                        <span class="meta-label">Ship To:</span><br/>
+                        <apex:outputText value="{!quote.Ship_To_Name__c}" rendered="{!NOT(ISBLANK(quote.Ship_To_Name__c))}"/><br rendered="{!NOT(ISBLANK(quote.Ship_To_Name__c))}"/>
+                        <apex:outputText value="{!formattedShipTo}" escape="false"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th class="text-right">List Price</th>
+                    <th class="text-right">Sales Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-right">Discount (%)</th>
+                    <th class="text-right">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!lineItems}" var="item">
+                    <tr>
+                        <td>{!item.productName}</td>
+                        <td class="text-right">{!item.listPrice}</td>
+                        <td class="text-right">{!item.salesPrice}</td>
+                        <td class="text-center">{!item.quantity}</td>
+                        <td class="text-right">{!item.discountPercent}</td>
+                        <td class="text-right">{!item.totalPrice}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+
+        <table align="right" class="totals-table">
+            <tr><td class="meta-label text-right">Subtotal</td><td class="text-right">{!formattedSubtotal}</td></tr>
+            <tr><td class="meta-label text-right">Discount</td><td class="text-right">{!formattedDiscount}</td></tr>
+            <tr><td class="meta-label text-right">Total Price</td><td class="text-right">{!formattedTotalPrice}</td></tr>
+            <tr><td class="meta-label text-right">Tax</td><td class="text-right">{!formattedTax}</td></tr>
+            <tr><td class="meta-label text-right">Shipping &amp; Handling</td><td class="text-right">{!formattedShipping}</td></tr>
+            <tr class="text-bold"><td class="meta-label text-right" style="color:#000;">Grand Total</td><td class="text-right">{!formattedGrandTotal}</td></tr>
+        </table>
+        
+        <div style="clear: both;"></div>
+
+        <div class="signature-block">
+            <div class="section-title">Quote Acceptance Information</div>
+            <p>To accept this quote, please sign and return this document.</p>
+            <table style="width: 100%; margin-top: 30px;">
+                <tr>
+                    <td><div class="meta-label">Signature:</div><div class="sig-line" style="margin-top: 25px;"></div></td>
+                    <td><div class="meta-label">Date:</div><div class="sig-line" style="margin-top: 25px;"></div></td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 25px;"><div class="meta-label">Name:</div><div class="sig-line" style="margin-top: 25px;"></div></td>
+                    <td style="padding-top: 25px;"><div class="meta-label">Title:</div><div class="sig-line" style="margin-top: 25px;"></div></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

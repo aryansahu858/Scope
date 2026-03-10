@@ -1,0 +1,33 @@
+<apex:page standardController="Quote__c" extensions="QuotePdfController"
+    showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:slds />
+
+    <apex:form id="mainForm">
+        <apex:pageMessages />
+        <apex:actionFunction name="executeSavePdf" action="{!savePdf}" rerender="mainForm"/>
+    </apex:form>
+
+    <div class="slds-scope">
+        <div style="height: 70vh; width: 100%;">
+            <iframe src="{!$Page.QuotePDFGenerator}?id={!Quote__c.Id}" 
+                    width="100%" height="100%" frameborder="0">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.parent.postMessage({
+                name: 'updateQuickActionProperties',
+                properties: {
+                    enableSaveButton: true
+                }
+            }, '*');
+        });
+
+        window.invokeAction = function() {
+            executeSavePdf();
+        };
+    </script>
+
+</apex:page>
