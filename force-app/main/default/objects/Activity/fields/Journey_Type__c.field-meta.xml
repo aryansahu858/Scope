@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Journey_Type__c</fullName>
+    <label>Journey Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Planned</fullName><default>false</default><label>Planned</label></value><value><fullName>Actual</fullName><default>false</default><label>Actual</label></value><value><fullName>Unplanned</fullName><default>false</default><label>Unplanned</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Event Attendance" icon-name="standard:location">
+        <div class="slds-p-around_medium slds-align_absolute-center">
+            
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Processing..." size="medium"></lightning-spinner>
+            </template>
+
+            <lightning-button-group>
+                <lightning-button 
+                    label="Check-In" 
+                    variant="brand" 
+                    icon-name="utility:check" 
+                    onclick={handleCheckIn}
+                    class="slds-m-right_x-small">
+                </lightning-button>
+
+                <lightning-button 
+                    label="Check-Out" 
+                    variant="destructive" 
+                    icon-name="utility:logout" 
+                    onclick={handleCheckOut}>
+                </lightning-button>
+            </lightning-button-group>
+
+        </div>
+    </lightning-card>
+</template>

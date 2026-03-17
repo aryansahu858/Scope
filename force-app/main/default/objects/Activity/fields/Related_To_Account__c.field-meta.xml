@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Related_To_Account__c</fullName>
+    <label>Related To Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Activities</relationshipLabel>
+    <relationshipName>Activities_Related_To_Account</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>
