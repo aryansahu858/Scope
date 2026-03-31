@@ -28,7 +28,7 @@
 		<members>Quote__c</members>
 		<name>CustomObject</name>
 	</types>
-    <types>
+	 <types>
 		<members>Account_Record_Page</members>
 		<members>Account_Record_Page_STNM</members>
 		<members>Contact_Record_Page</members>
@@ -41,6 +41,10 @@
 		<members>Opportunity_Record_Page</members>
 		<members>Order_Record_Page_STNM</members>
         <members>Quote_Record_Page_STNM</members>
+		<members>Product_Record_Page_STNM</members>
+		<members>Price_Book_Record_Page_STNM</members>
+		<members>Price_Book_Entry_Record_Page_STNM</members>
+		<members>Quote_Line_Item_Record_Page_STNM</members>
 		<name>FlexiPage</name>
 	</types>
     <types>
@@ -154,6 +158,18 @@
     <types>
         <members>Quote_Email_Template</members>
         <name>EmailTemplateFolder</name>
+    </types>
+	<types>
+        <members>SCOPE_TNM_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+	<types>
+		<members>SCOPE_TNM</members>
+		<name>CustomApplication</name>
+	</types>
+	 <types>
+        <members>STNMLOGO3</members>
+        <name>ContentAsset</name>
     </types>
 	<version>66.0</version>
 </Package>
