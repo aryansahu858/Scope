@@ -3,5 +3,7 @@
     <fullName>Last_Deal_Closure_Date__c</fullName>
     <label>Last Deal Closure Date</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Date</type>
 </CustomField>

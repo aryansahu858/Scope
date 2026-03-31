@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Lifetime_Value_Individual__c</fullName>
+    <label>Customer Lifetime Value Individual</label>
+    <summarizedField>Opportunity__c.Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>Opportunity__c.Stage__c</field>
+        <operation>equals</operation>
+        <value>Closed Won</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Opportunity__c.Account_Name__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

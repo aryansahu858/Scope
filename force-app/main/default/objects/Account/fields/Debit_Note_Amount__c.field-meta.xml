@@ -3,7 +3,9 @@
     <fullName>Debit_Note_Amount__c</fullName>
     <label>Debit Note Amount</label>
     <precision>18</precision>
-    <scale>2</scale>
     <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Currency</type>
 </CustomField>

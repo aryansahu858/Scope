@@ -3,16 +3,37 @@
     <fullName>Config_Opt_1__c</fullName>
     <label>Config Opt 1</label>
     <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
-            <value><fullName>None</fullName><default>true</default><label>None</label></value>
-            <value><fullName>With Download Feature</fullName><default>false</default><label>With Download Feature</label></value>
-            <value><fullName>With Open Earth Indicator</fullName><default>false</default><label>With Open Earth Indicator</label></value>
-            <value><fullName>With Download &amp; Open Earth Indicator</fullName><default>false</default><label>With Download &amp; Open Earth Indicator</label></value>
-            <value><fullName>200A *</fullName><default>false</default><label>200A *</label></value>
-            
+            <value>
+                <fullName>None</fullName>
+                <default>true</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>With Download Feature</fullName>
+                <default>false</default>
+                <label>With Download Feature</label>
+            </value>
+            <value>
+                <fullName>With Open Earth Indicator</fullName>
+                <default>false</default>
+                <label>With Open Earth Indicator</label>
+            </value>
+            <value>
+                <fullName>With Download &amp; Open Earth Indicator</fullName>
+                <default>false</default>
+                <label>With Download &amp; Open Earth Indicator</label>
+            </value>
+            <value>
+                <fullName>200A *</fullName>
+                <default>false</default>
+                <label>200A *</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

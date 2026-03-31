@@ -26,9 +26,14 @@
                 <label>East</label>
             </value>
             <value>
-                <fullName>West</fullName>
+                <fullName>West 1</fullName>
                 <default>false</default>
-                <label>West</label>
+                <label>West 1</label>
+            </value>
+            <value>
+                <fullName>West 2</fullName>
+                <default>false</default>
+                <label>West 2</label>
             </value>
             <value>
                 <fullName>Central</fullName>

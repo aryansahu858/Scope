@@ -2,8 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>BG2_Expiry_Date__c</fullName>
     <label>BG2 Expiry Date</label>
-    <type>Date</type>
     <required>false</required>
-    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
+    <type>Date</type>
 </CustomField>

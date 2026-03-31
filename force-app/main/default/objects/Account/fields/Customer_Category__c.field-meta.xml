@@ -3,6 +3,8 @@
     <fullName>Customer_Category__c</fullName>
     <label>Customer Category</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -12,11 +14,13 @@
                 <fullName>Key Account</fullName>
                 <default>false</default>
                 <label>Key Account</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Regular</fullName>
                 <default>false</default>
                 <label>Regular</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>One-Time</fullName>
                 <default>false</default>
                 <label>One-Time</label>

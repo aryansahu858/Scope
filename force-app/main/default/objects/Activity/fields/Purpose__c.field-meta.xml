@@ -7,7 +7,31 @@
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
-            <value><fullName>Lead Follow-up</fullName><default>false</default><label>Lead Follow-up</label></value><value><fullName>Opportunity Discussion</fullName><default>false</default><label>Opportunity Discussion</label></value><value><fullName>Quote Request</fullName><default>false</default><label>Quote Request</label></value><value><fullName>Support</fullName><default>false</default><label>Support</label></value><value><fullName>Other</fullName><default>false</default><label>Other</label></value>
+            <value>
+                <fullName>Lead Follow-up</fullName>
+                <default>false</default>
+                <label>Lead Follow-up</label>
+            </value>
+            <value>
+                <fullName>Opportunity Discussion</fullName>
+                <default>false</default>
+                <label>Opportunity Discussion</label>
+            </value>
+            <value>
+                <fullName>Quote Request</fullName>
+                <default>false</default>
+                <label>Quote Request</label>
+            </value>
+            <value>
+                <fullName>Support</fullName>
+                <default>false</default>
+                <label>Support</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

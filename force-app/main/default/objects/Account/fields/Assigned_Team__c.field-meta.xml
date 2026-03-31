@@ -3,20 +3,24 @@
     <fullName>Assigned_Team__c</fullName>
     <label>Assigned Team</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Test & Measurement</fullName>
+                <fullName>Test &amp; Measurement</fullName>
                 <default>false</default>
-                <label>Test & Measurement</label>
-            </value><value>
+                <label>Test &amp; Measurement</label>
+            </value>
+            <value>
                 <fullName>Protection Solution</fullName>
                 <default>false</default>
                 <label>Protection Solution</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Substation Services</fullName>
                 <default>false</default>
                 <label>Substation Services</label>

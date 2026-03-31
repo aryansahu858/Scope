@@ -3,6 +3,8 @@
     <fullName>Credit_Rating__c</fullName>
     <label>Credit Rating</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -12,19 +14,23 @@
                 <fullName>*</fullName>
                 <default>false</default>
                 <label>*</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>**</fullName>
                 <default>false</default>
                 <label>**</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>***</fullName>
                 <default>false</default>
                 <label>***</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>****</fullName>
                 <default>false</default>
                 <label>****</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>*****</fullName>
                 <default>false</default>
                 <label>*****</label>

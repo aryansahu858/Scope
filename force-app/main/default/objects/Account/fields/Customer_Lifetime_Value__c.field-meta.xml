@@ -3,7 +3,9 @@
     <fullName>Customer_Lifetime_Value__c</fullName>
     <label>Customer Lifetime Value</label>
     <precision>18</precision>
-    <scale>2</scale>
     <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Currency</type>
 </CustomField>

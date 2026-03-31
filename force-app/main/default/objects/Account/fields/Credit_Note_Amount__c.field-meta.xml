@@ -3,7 +3,9 @@
     <fullName>Credit_Note_Amount__c</fullName>
     <label>Credit Note Amount</label>
     <precision>18</precision>
-    <scale>2</scale>
     <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Currency</type>
 </CustomField>

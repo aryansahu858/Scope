@@ -1,0 +1,13 @@
+Hi ,<br/>
+
+There is one pending request for Quote submission . <br/>Please go through details
+
+Opp Name -<br/>
+
+
+
+Here is the link of this quote<br/>
+
+<a href="https://shubham--uat.sandbox.lightning.force.com/lightning/r/Verification_Activity__c/{!Verification_Activity__c.Id}/view">
+Click here to open the activity
+</a>

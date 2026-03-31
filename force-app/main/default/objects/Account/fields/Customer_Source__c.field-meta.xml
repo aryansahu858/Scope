@@ -3,6 +3,8 @@
     <fullName>Customer_Source__c</fullName>
     <label>Customer Source</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -12,11 +14,13 @@
                 <fullName>Converted Lead</fullName>
                 <default>false</default>
                 <label>Converted Lead</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Direct</fullName>
                 <default>false</default>
                 <label>Direct</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Referral</fullName>
                 <default>false</default>
                 <label>Referral</label>

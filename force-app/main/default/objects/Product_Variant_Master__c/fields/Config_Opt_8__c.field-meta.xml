@@ -3,14 +3,27 @@
     <fullName>Config_Opt_8__c</fullName>
     <label>Config Opt 8</label>
     <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
-            <value><fullName>15m Test Lead Set</fullName><default>true</default><label>15m Test Lead Set</label></value>
-            <value><fullName>20m Test Lead Set</fullName><default>false</default><label>20m Test Lead Set</label></value>
-            <value><fullName>25m Test Lead Set</fullName><default>false</default><label>25m Test Lead Set</label></value>
-            
+            <value>
+                <fullName>15m Test Lead Set</fullName>
+                <default>true</default>
+                <label>15m Test Lead Set</label>
+            </value>
+            <value>
+                <fullName>20m Test Lead Set</fullName>
+                <default>false</default>
+                <label>20m Test Lead Set</label>
+            </value>
+            <value>
+                <fullName>25m Test Lead Set</fullName>
+                <default>false</default>
+                <label>25m Test Lead Set</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

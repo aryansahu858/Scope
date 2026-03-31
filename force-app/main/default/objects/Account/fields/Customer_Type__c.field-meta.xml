@@ -3,6 +3,8 @@
     <fullName>Customer_Type__c</fullName>
     <label>Customer Type</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -12,11 +14,13 @@
                 <fullName>New</fullName>
                 <default>false</default>
                 <label>New</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Existing</fullName>
                 <default>false</default>
                 <label>Existing</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Regular</fullName>
                 <default>false</default>
                 <label>Regular</label>

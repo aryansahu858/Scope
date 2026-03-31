@@ -4,6 +4,5 @@
     <displayFormat>EVT-{000000}</displayFormat>
     <externalId>false</externalId>
     <label>Event Name</label>
-    <startingNumber>1</startingNumber>
     <type>AutoNumber</type>
 </CustomField>

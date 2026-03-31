@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email template is used when we send quote for approval</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Submit Quote For Approval</name>
+    <style>none</style>
+    <subject>Request For Quote Submission</subject>
+    <textOnly>Hi ,
+There is one pending request for Quote submission .
+Please go through details  Opp Name -
+Here is the link of this quote
+Click here to open the activity</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

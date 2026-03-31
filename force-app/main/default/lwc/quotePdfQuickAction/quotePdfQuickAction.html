@@ -1,0 +1,23 @@
+<template>
+    <lightning-quick-action-panel title="Review & Save Quote PDF">
+        
+        <div style="height: 60vh; width: 100%;">
+            <iframe src={pdfUrl} width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        
+        <div slot="footer">
+            <lightning-button 
+                label="Cancel" 
+                onclick={handleCancel} 
+                class="slds-m-right_small">
+            </lightning-button>
+            <lightning-button 
+                label="Save PDF" 
+                variant="brand" 
+                onclick={handleSave} 
+                disabled={isSaving}>
+            </lightning-button>
+        </div>
+        
+    </lightning-quick-action-panel>
+</template>

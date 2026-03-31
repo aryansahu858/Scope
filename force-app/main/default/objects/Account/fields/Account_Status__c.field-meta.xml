@@ -3,6 +3,8 @@
     <fullName>Account_Status__c</fullName>
     <label>Account Status</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -12,7 +14,8 @@
                 <fullName>Active</fullName>
                 <default>false</default>
                 <label>Active</label>
-            </value><value>
+            </value>
+            <value>
                 <fullName>Dormant</fullName>
                 <default>false</default>
                 <label>Dormant</label>

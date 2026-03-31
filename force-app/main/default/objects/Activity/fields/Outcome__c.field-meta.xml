@@ -7,7 +7,26 @@
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
-            <value><fullName>Successful</fullName><default>false</default><label>Successful</label></value><value><fullName>Rescheduled</fullName><default>false</default><label>Rescheduled</label></value><value><fullName>No Show</fullName><default>false</default><label>No Show</label></value><value><fullName>Cancelled</fullName><default>false</default><label>Cancelled</label></value>
+            <value>
+                <fullName>Successful</fullName>
+                <default>false</default>
+                <label>Successful</label>
+            </value>
+            <value>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+                <label>Rescheduled</label>
+            </value>
+            <value>
+                <fullName>No Show</fullName>
+                <default>false</default>
+                <label>No Show</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

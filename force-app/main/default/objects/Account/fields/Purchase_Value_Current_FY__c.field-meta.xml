@@ -3,7 +3,9 @@
     <fullName>Purchase_Value_Current_FY__c</fullName>
     <label>Purchase Value (Current FY)</label>
     <precision>18</precision>
-    <scale>2</scale>
     <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Currency</type>
 </CustomField>

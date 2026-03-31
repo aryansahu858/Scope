@@ -7,5 +7,7 @@
     <relationshipLabel>Product Variant Masters</relationshipLabel>
     <relationshipName>Product_Variant_Masters_Product</relationshipName>
     <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

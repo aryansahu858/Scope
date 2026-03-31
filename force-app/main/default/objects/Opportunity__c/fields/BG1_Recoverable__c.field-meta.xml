@@ -3,5 +3,6 @@
     <fullName>BG1_Recoverable__c</fullName>
     <defaultValue>false</defaultValue>
     <label>BG1 Recoverable</label>
+    <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

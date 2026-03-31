@@ -382,7 +382,6 @@ export default class LeadConverter extends NavigationMixin(LightningElement) {
                 // Pre-fill form fields using Lead data.
                 this.accountName     = lead.Company__c;
                 this.contactLastName = lead.Name;
-
                 // Opportunity name defaults to "<Company>-" as a starting point.
                 this.oppName = lead.Company__c ? `${lead.Company__c}-` : '';
 
@@ -463,7 +462,7 @@ export default class LeadConverter extends NavigationMixin(LightningElement) {
             existingContactId : this.existingContactId,
             contactDetails    : { firstName: this.contactFirstName, lastName: this.contactLastName },
             createOpportunity : !this.doNotCreateOpp,
-            opportunityDetails: { name: this.oppName, closeDate: this.oppCloseDate, stageName: this.oppStage }
+            opportunityDetails: { name: this.oppName, closeDate: this.oppCloseDate, stageName: this.oppStage}
         };
 
         convertLead({ payload })

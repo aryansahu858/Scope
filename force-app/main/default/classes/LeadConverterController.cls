@@ -3,7 +3,10 @@
  * custom Lead__c records into Accounts, Contacts, and Opportunities.
  * @author            : Aryan Sahu
  * @last modified on  : 2026-02-24
+ * @last modified by  :
  * @version           : 2.2
+ * @version History   : CH01 : Ayush Patial : Map Lead Region Field Data to Opp Region on convert lead 
+                      : CH02 : Ayush Patial : Map Lead BU to Opp BU on lead conversion
 **/
 public with sharing class LeadConverterController {
 
@@ -16,7 +19,7 @@ public with sharing class LeadConverterController {
     public static Lead__c getLead(Id leadId) {
         return [
             SELECT Id, Name, Company__c, Lead_Status__c, Has_Converted__c,
-                   Title__c, Email__c, Phone__c, Lead_Source__c,
+                   Title__c, Email__c, Phone__c, Lead_Source__c,Territory_Region__c,
                    Address__Street__s, Address__City__s, Address__StateCode__s, Address__PostalCode__s, Address__CountryCode__s
             FROM Lead__c 
             WHERE Id = :leadId 
@@ -51,7 +54,7 @@ public with sharing class LeadConverterController {
     @AuraEnabled
     public static Map<String, Object> convertLead(Map<String, Object> payload) {
         Map<String, Object> response = new Map<String, Object>();
-        
+        System.debug(payload);
         // Define a Savepoint to ensure atomicity (all or nothing)
         Savepoint sp = Database.setSavepoint();
 
@@ -60,8 +63,8 @@ public with sharing class LeadConverterController {
             
             // Re-fetch the Lead to ensure we have the most recent data for backend mapping
             Lead__c sourceLead = [
-                SELECT Title__c, Email__c, Phone__c, Lead_Source__c, Location__c,
-                       Address__Street__s, Address__City__s, Address__StateCode__s, Address__PostalCode__s, Address__CountryCode__s
+                SELECT Title__c, Email__c, Phone__c, Lead_Source__c, Location__c,Territory_Region__c,
+                       Address__Street__s, Address__City__s, Address__StateCode__s, Address__PostalCode__s, Address__CountryCode__s,Business_Unit__c
                 FROM Lead__c 
                 WHERE Id = :leadId 
                 LIMIT 1
@@ -135,11 +138,15 @@ public with sharing class LeadConverterController {
                     Stage__c         = (String) oppData.get('stageName'),
                     Close_Date__c    = Date.valueOf((String)oppData.get('closeDate')),
                     Account_Name__c  = finalAccountId,
-                    Lead_Source__c   = sourceLead.Lead_Source__c
+                    Lead_Source__c   = sourceLead.Lead_Source__c,
+                    Opportunity_Region__c = sourceLead.Territory_Region__c, //CH01
+                    Business_Unit__c   = sourceLead.Business_Unit__c //CH02
                 );
                 insert newOpp;
                 oppId = newOpp.Id;
             }
+
+            
 
             // --- 4. FINALIZE LEAD STATUS (DELETION) ---
             Lead__c leadToDelete = new Lead__c(Id = leadId);
