@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>SCOPE_TNM</members>
-		<name>CustomApplication</name>
+		<members>Admin</members>
+		<members>Platform User</members>
+		<members>PreSales User</members>
+		<members>Sales User</members>
+		<name>Profile</name>
 	</types>
-	 <types>
-        <members>STNMLOGO3</members>
-        <name>ContentAsset</name>
-    </types>
 	<version>66.0</version>
 </Package>

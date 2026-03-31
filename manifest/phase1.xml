@@ -137,7 +137,14 @@
 		<members>Formula</members>
 		<name>Settings</name>
 	</types>
-    	<types>
+		<types>
+		<members>Admin</members>
+		<members>Platform User</members>
+		<members>PreSales User</members>
+		<members>Sales User</members>
+		<name>Profile</name>
+	</types>
+	<types>
 		<members>Account</members>
 		<members>Approval_History__c</members>
 		<members>Contact</members>
