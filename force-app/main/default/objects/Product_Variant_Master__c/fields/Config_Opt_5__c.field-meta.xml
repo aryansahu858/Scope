@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Config_Opt_5__c</fullName>
+    <label>Config Opt 5</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Reserved</fullName><default>false</default><label>Reserved</label></value>
+            <value><fullName>USB</fullName><default>true</default><label>USB</label></value>
+            
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

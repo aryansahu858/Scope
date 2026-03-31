@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BG2_Recoverable__c</fullName>
+    <defaultValue>false</defaultValue>
+    <label>BG2 Recoverable</label>
+    <type>Checkbox</type>
+</CustomField>

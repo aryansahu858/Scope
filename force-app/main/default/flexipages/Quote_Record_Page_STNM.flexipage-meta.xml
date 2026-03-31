@@ -4,16 +4,85 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>Edit</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Delete</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Add_Product</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Generate_Quote</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Clone</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.LogACall</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewTask</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewEvent</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewOpportunity</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ChangeOwnerOne</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>PrintableView</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ChangeRecordType</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Submit_For_Approval</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Approve</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Reject</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Notify_Pre_Sales</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Set_Quote_to_Primary</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Unlock_Quote</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.is_Lock__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>true</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Quote__c.Create_Order</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>collapsed</name>
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsConfiguration</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsInNative</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>hideChatterActions</name>
@@ -31,7 +100,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>hideUpdateButton</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>variant</name>
@@ -96,6 +165,36 @@
                 <identifier>RecordAccount_Name_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Is_Primary__c</fieldItem>
+                <identifier>RecordIs_Primary__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.PriceBook2Id__c</fieldItem>
+                <identifier>RecordPriceBook2Id__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Related_Order__c</fieldItem>
+                <identifier>RecordRelated_Order__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-f57a8bda-10cf-4e98-8842-b58d694972a3</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -116,8 +215,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Syncing__c</fieldItem>
-                <identifier>RecordSyncing_cField</identifier>
+                <fieldItem>Record.Is_Primary__c</fieldItem>
+                <identifier>RecordIs_Primary_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -448,6 +547,16 @@
                 <identifier>RecordIs_Latest_Version_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Related_Order__c</fieldItem>
+                <identifier>RecordRelated_Order_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-34783efc-2eab-41a3-8dce-0c92c64b1034</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -492,7 +601,7 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Price_Book__c</fieldItem>
+                <fieldItem>Record.PriceBook__c</fieldItem>
                 <identifier>RecordPrice_Book_cField</identifier>
             </fieldInstance>
         </itemInstances>
@@ -706,16 +815,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Related_Order__c</fieldItem>
-                <identifier>RecordRelated_Order_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-0ef6d745-c983-41af-a0ea-17d32f8ba4c3</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -981,6 +1080,63 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>New</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>adminFilters</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Quote__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Orders__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListDisplayType</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Orders</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>__DEFAULT__</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Default</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList3</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>

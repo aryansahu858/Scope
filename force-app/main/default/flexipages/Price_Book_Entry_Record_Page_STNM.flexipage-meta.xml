@@ -106,6 +106,16 @@
                 <identifier>RecordUse_Standard_Price_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.CurrencyIsoCode</fieldItem>
+                <identifier>RecordCurrencyIsoCodeField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-29da35fb-a27d-4d70-8b72-47ed956a7376</name>
         <type>Facet</type>
     </flexiPageRegions>

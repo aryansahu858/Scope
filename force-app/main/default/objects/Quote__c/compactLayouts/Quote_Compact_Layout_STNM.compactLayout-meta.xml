@@ -3,8 +3,8 @@
     <fullName>Quote_Compact_Layout_STNM</fullName>
     <fields>Quote_Name__c</fields>
     <fields>Name</fields>
+    <fields>Is_Primary__c</fields>
     <fields>Quote_Date__c</fields>
-    <fields>Syncing__c</fields>
     <fields>Opportunity_Name__c</fields>
     <fields>Account_Name__c</fields>
     <fields>Grand_Total__c</fields>

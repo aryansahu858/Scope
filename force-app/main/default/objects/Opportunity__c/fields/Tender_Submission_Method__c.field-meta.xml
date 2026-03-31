@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tender_Submission_Method__c</fullName>
+    <label>Tender Submission Method</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Part 1</fullName>
+                <default>false</default>
+                <label>Part 1</label>
+            </value>
+            <value>
+                <fullName>Part 2</fullName>
+                <default>false</default>
+                <label>Part 2</label>
+            </value>
+            <value>
+                <fullName>Part 3</fullName>
+                <default>false</default>
+                <label>Part 3</label>
+            </value>
+            <value>
+                <fullName>Part 4</fullName>
+                <default>false</default>
+                <label>Part 4</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

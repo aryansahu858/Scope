@@ -106,6 +106,24 @@
                 <identifier>RecordStatus_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Quote__c</fieldItem>
+                <identifier>RecordQuote__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Opportunity__c</fieldItem>
+                <identifier>RecordOpportunity__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Invoice__c</fieldItem>
+                <identifier>RecordInvoice__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-c090ab6f-27f2-4f69-9c54-54caea6b52f4</name>
         <type>Facet</type>
     </flexiPageRegions>

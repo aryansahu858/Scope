@@ -192,6 +192,12 @@
                 <identifier>RecordExchange_Rate_Used_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Product_Variant_Master__c</fieldItem>
+                <identifier>RecordProduct_Variant_Master__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-2969c515-1f4c-49b4-ba51-1211c80b1f8d</name>
         <type>Facet</type>
     </flexiPageRegions>

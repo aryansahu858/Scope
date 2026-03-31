@@ -34,6 +34,109 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>EMD_Applicable__c</picklist>
+        <values>
+            <fullName>Exempted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>EMD_Form__c</picklist>
+        <values>
+            <fullName>BG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Execution_Stage__c</picklist>
+        <values>
+            <fullName>Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indent Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nego%2FRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offer Prep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offer Prep %26 Submission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PO Awaited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Participation Decision</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price Evaluation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Techno-Com%2E Evaluation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender Receipt</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Execution_Type__c</picklist>
+        <values>
+            <fullName>Purchase Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Internal_Approval_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Invoice_Status__c</picklist>
         <values>
             <fullName>Paid</fullName>
@@ -92,6 +195,73 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>MII_Preference__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MSE_Preference__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PBG_Applicable__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PQR_Compliance__c</picklist>
+        <values>
+            <fullName>Matching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Maching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partially matching</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Participation_Decision__c</picklist>
+        <values>
+            <fullName>Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Participate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regret</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Project__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -99,6 +269,47 @@
         </values>
         <values>
             <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reverse_Auction__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SD_Applicable__c</picklist>
+        <values>
+            <fullName>Exempted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SD_Form__c</picklist>
+        <values>
+            <fullName>BG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -122,6 +333,82 @@
         </values>
         <values>
             <fullName>Project Award to EPC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tender_Cost__c</picklist>
+        <values>
+            <fullName>DD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exempted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tender_Source__c</picklist>
+        <values>
+            <fullName>Customer Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GeM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IndiaMart</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Palladium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender Tiger</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tender_Submission_Method__c</picklist>
+        <values>
+            <fullName>Part 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Part 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Part 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Part 4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tender_Type__c</picklist>
+        <values>
+            <fullName>Offline</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
             <default>false</default>
         </values>
     </picklistValues>

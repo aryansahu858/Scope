@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Code__c</fullName>
+    <label>Product Code</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFARRIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFARRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFARRUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFARRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFARQIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFARQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFARQUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFARQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFALRIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFALRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFALRUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFALRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFALQIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFALQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFALQUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFALQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFAERIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFAERIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFAERUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFAERUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFAEQIN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFAEQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : NNFFFNFAEQUN)</fullName><default>false</default><label>CRM 100 (Order Code : NNFFFNFAEQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFARRIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFARRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFARRUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFARRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFARQIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFARQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFARQUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFARQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFALRIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFALRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFALRUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFALRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFALQIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFALQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFALQUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFALQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFAERIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFAERIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFAERUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFAERUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFAEQIN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFAEQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : DNFFFNFAEQUN)</fullName><default>false</default><label>CRM 100 (Order Code : DNFFFNFAEQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFARRIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFARRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFARRUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFARRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFARQIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFARQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFARQUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFARQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFALRIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFALRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFALRUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFALRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFALQIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFALQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFALQUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFALQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFAERIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFAERIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFAERUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFAERUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFAEQIN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFAEQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : HNFFFNFAEQUN)</fullName><default>false</default><label>CRM 100 (Order Code : HNFFFNFAEQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFARRIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFARRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFARRUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFARRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFARQIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFARQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFARQUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFARQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFALRIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFALRIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFALRUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFALRUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFALQIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFALQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFALQUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFALQUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFAERIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFAERIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFAERUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFAERUN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFAEQIN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFAEQIN)</label></value>
+            <value><fullName>CRM 100 (Order Code : BNFFFNFAEQUN)</fullName><default>false</default><label>CRM 100 (Order Code : BNFFFNFAEQUN)</label></value>
+            <value><fullName>CRM 200B+ (Order Code : SNNNUNFARFIN)</fullName><default>false</default><label>CRM 200B+ (Order Code : SNNNUNFARFIN)</label></value>
+            <value><fullName>CRM 200B+ (Order Code : SNNNUNFARFUN)</fullName><default>false</default><label>CRM 200B+ (Order Code : SNNNUNFARFUN)</label></value>
+            <value><fullName>CRM 200B+ (Order Code : SNNNUNFARFI2)</fullName><default>false</default><label>CRM 200B+ (Order Code : SNNNUNFARFI2)</label></value>
+            
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

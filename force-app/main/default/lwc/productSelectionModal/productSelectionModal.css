@@ -1,0 +1,58 @@
+/* Fixed-height scrollable product table body */
+.modal-body-fixed {
+    min-height : 360px;
+    max-height : 420px;
+    overflow-y : auto;
+}
+
+/* Scrollable container for the data table */
+.product-table-scroll-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height : 320px;
+}
+
+/* Column widths */
+.col-name   { min-width: 180px; }
+.col-code   { min-width: 100px; }
+.col-price  { min-width: 110px; text-align: right; }
+.col-family { min-width: 130px; }
+
+/* Right-align price cells */
+td[data-label="List Price"] .slds-truncate {
+    text-align: right;
+}
+
+/* Filter button aligned inside the search input */
+.filter-btn {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Muted icon for empty states */
+.icon-muted {
+    opacity: 0.4;
+}
+
+/* ========================================== */
+/* ENHANCEMENT 4: Step 3 Matrix Styles        */
+/* ========================================== */
+.custom-pricing-table lightning-input {
+    min-width: 70px;
+    margin-bottom: 0;
+}
+
+.custom-pricing-table th, .custom-pricing-table td {
+    vertical-align: middle !important;
+    text-align: right; 
+}
+
+/* Keep Product name left-aligned */
+.custom-pricing-table th:first-child, 
+.custom-pricing-table td:first-child {
+    text-align: left;
+    min-width: 150px;
+}

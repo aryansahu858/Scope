@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <label>Product Variant Master</label>
+    <pluralLabel>Product Variant Masters</pluralLabel>
+    <nameField>
+        <displayFormat>PVM-{000000}</displayFormat>
+        <label>Variant Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableReports>true</enableReports>
+    <enableHistory>true</enableHistory>
+</CustomObject>

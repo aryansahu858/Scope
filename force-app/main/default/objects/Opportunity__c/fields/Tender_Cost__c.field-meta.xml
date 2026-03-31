@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tender_Cost__c</fullName>
+    <label>Tender Cost</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nil</fullName>
+                <default>false</default>
+                <label>Nil</label>
+            </value>
+            <value>
+                <fullName>DD</fullName>
+                <default>false</default>
+                <label>DD</label>
+            </value>
+            <value>
+                <fullName>Online</fullName>
+                <default>false</default>
+                <label>Online</label>
+            </value>
+            <value>
+                <fullName>Exempted</fullName>
+                <default>false</default>
+                <label>Exempted</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

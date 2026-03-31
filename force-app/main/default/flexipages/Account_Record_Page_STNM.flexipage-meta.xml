@@ -101,6 +101,32 @@
                 <identifier>RecordNumberOfEmployeesField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Customer_Lifetime_Value_Individual__c</fieldItem>
+                <identifier>RecordCustomer_Lifetime_Value_Individual__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Purchase_Value_Current_FY__c</fieldItem>
+                <identifier>RecordPurchase_Value_Current_FY__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.CLV_Individual__c</fieldItem>
+                <identifier>RecordCLV_Individual__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-a3db02c4-1ca7-451c-a432-b4aee24dfdde</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -315,16 +341,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Customer_Lifetime_Value__c</fieldItem>
                 <identifier>RecordCustomer_Lifetime_Value_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Purchase_Value_Current_FY__c</fieldItem>
-                <identifier>RecordPurchase_Value_Current_FY_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -795,6 +811,12 @@
                     <valueList>
                         <valueListItems>
                             <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Amount__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Stage__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

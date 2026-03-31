@@ -151,7 +151,7 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Opportunity</label>
     <nameField>
         <label>Opportunity Name</label>
@@ -159,6 +159,6 @@
     </nameField>
     <pluralLabel>Opportunities</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

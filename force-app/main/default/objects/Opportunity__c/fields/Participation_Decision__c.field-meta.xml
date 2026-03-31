@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Participation_Decision__c</fullName>
+    <label>Participation Decision</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Hold</fullName>
+                <default>false</default>
+                <label>Hold</label>
+            </value>
+            <value>
+                <fullName>Participate</fullName>
+                <default>false</default>
+                <label>Participate</label>
+            </value>
+            <value>
+                <fullName>Regret</fullName>
+                <default>false</default>
+                <label>Regret</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

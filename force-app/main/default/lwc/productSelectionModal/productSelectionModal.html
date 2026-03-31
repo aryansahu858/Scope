@@ -1,0 +1,166 @@
+<template>
+    <!--
+    <style>
+        .slds-modal__container {
+            max-width: 90rem !important;
+            width: 90% !important;
+        }
+    </style> -->
+
+    <div class="slds-p-around_medium" style="position: relative; min-height: 450px;">
+        
+        <div class="slds-m-bottom_medium">
+            <template if:true={isStepOne}>
+                <p class="slds-text-body_small slds-text-color_weak">Select Products</p>
+            </template>
+            <template if:true={isStepTwo}>
+                <h2 class="slds-text-heading_medium slds-m-bottom_xx-small">Configure Selected Products</h2>
+                <p class="slds-text-body_small slds-text-color_weak">Select options to determine base pricing</p>
+            </template>
+            <template if:true={isStepThree}>
+                <h2 class="slds-text-heading_medium slds-m-bottom_xx-small">Pricing Breakdown & Adjustments</h2>
+                <p class="slds-text-body_small slds-text-color_weak">Apply quantities, discounts, and uplifts</p>
+            </template>
+        </div>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading…" size="medium" variant="brand"></lightning-spinner>
+        </template>
+
+        <template if:true={isStepOne}>
+            <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-input-has-icon slds-input-has-icon_left-right">
+                        <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search" class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"></lightning-icon>
+                        <input type="search" class="slds-input" placeholder="Search Products..." value={searchTerm} oninput={handleSearchInput} onkeydown={handleKeyDown} aria-label="Search Products" autocomplete="off" />
+                        <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right slds-icon-text-default filter-btn" title="Filter" onclick={handleFilterClick}>
+                            <lightning-icon icon-name="utility:filterList" size="x-small" alternative-text="Filter"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <template if:true={hasSelections}>
+                <div class="slds-m-bottom_small">
+                    <span class="slds-badge slds-badge_lightest">{selectedCount} product(s) selected</span>
+                </div>
+            </template>
+
+            <template if:true={isReady}>
+                <template if:true={hasProducts}>
+                    <div style="height: 350px;">
+                        <lightning-datatable key-field="Id" data={filteredProducts} columns={columns} onrowselection={handleRowSelection} selected-rows={selectedIdsArray} resize-column-disabled></lightning-datatable>
+                    </div>
+                </template>
+
+                <template if:true={isEmpty}>
+                    <div class="slds-illustration slds-illustration_small slds-p-around_large slds-text-align_center">
+                        <lightning-icon icon-name="utility:search" size="large" class="slds-m-bottom_small icon-muted"></lightning-icon>
+                        <p class="slds-text-heading_small slds-m-bottom_xx-small">No Products Found</p>
+                        <p class="slds-text-body_small slds-text-color_weak">Try adjusting your search term.</p>
+                    </div>
+                </template>
+            </template>
+        </template>
+
+        <template if:true={isStepTwo}>
+            <div class="slds-scrollable_y" style="max-height: 500px; padding-right: 0.5rem;">
+                <template for:each={configuredProducts} for:item="prod">
+                    <div key={prod.id} class="slds-box slds-box_small slds-m-bottom_small slds-theme_default">
+                        
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_small slds-border_bottom slds-p-bottom_xx-small">
+                            <div class="slds-text-heading_small">{prod.name}</div>
+                            <template if:false={prod.hasVariants}>
+                                <div class="slds-text-color_error slds-text-body_small">No Configurable Variants Available</div>
+                            </template>
+                        </div>
+
+                        <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_small slds-grid_vertical-align-end">
+                            <template for:each={prod.configFields} for:item="field">
+                                <div key={field.name} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
+                                    <lightning-combobox label={field.label} options={field.options} value={field.selectedValue} disabled={field.isDisabled} data-productid={prod.id} data-fieldname={field.name} onchange={handleConfigChange}></lightning-combobox>
+                                </div>
+                            </template>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
+                                <lightning-input type="text" label="Unit Price" value={prod.displayPrice} readonly ></lightning-input>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
+                                <lightning-button label="Get Price" variant="neutral" disabled={prod.isGetPriceDisabled} data-productid={prod.id} onclick={handleGetPrice}></lightning-button>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:true={isStepThree}>
+            <div class="slds-scrollable_x slds-scrollable_y" style="max-height: 500px; padding-bottom: 1rem;">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered custom-pricing-table">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Qty</th>
+                            <th>Disc %</th>
+                            <th>Disc Amt</th>
+                            <th>Uplift %</th>
+                            <th>Uplift Amt</th>
+                            <th>Final Unit Price</th>
+                            <th>Total Price</th>
+                            <th>GST %</th>
+                            <th>GST Amt</th>
+                            <th>Total Line Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={step3Data} for:item="row">
+                            <tr key={row.id}>
+                                <td><div class="slds-truncate" title={row.name}>{row.name}</div></td>
+                                <td><lightning-formatted-number value={row.unitPrice} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></td>
+                                <td><lightning-input type="number" variant="label-hidden" value={row.quantity} data-id={row.id} data-field="quantity" onchange={handlePricingChange} min="1"></lightning-input></td>
+                                <td><lightning-input type="number" variant="label-hidden" value={row.discountPct} data-id={row.id} data-field="discountPct" onchange={handlePricingChange} min="0" max="100" step="0.01"></lightning-input></td>
+                                <td><lightning-formatted-number value={row.discountAmt} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></td>
+                                <td><lightning-input type="number" variant="label-hidden" value={row.upliftPct} data-id={row.id} data-field="upliftPct" onchange={handlePricingChange} min="0" step="0.01"></lightning-input></td>
+                                <td><lightning-formatted-number value={row.upliftAmt} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></td>
+                                <td><lightning-formatted-number value={row.finalUnitPrice} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></td>
+                                <td><strong><lightning-formatted-number value={row.totalPrice} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></strong></td>
+                                <td><lightning-input type="number" variant="label-hidden" value={row.gstPct} data-id={row.id} data-field="gstPct" onchange={handlePricingChange} min="0" step="0.01"></lightning-input></td>
+                                <td><lightning-formatted-number value={row.gstAmt} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></td>
+                                <td class="slds-theme_shade"><strong><lightning-formatted-number value={row.totalLineAmount} format-style="currency" currency-code={row.currencyCode}></lightning-formatted-number></strong></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </div>
+
+    <div class="slds-p-around_medium slds-border_top slds-theme_default slds-grid slds-grid_align-spread">
+        <div>
+            <template if:true={isStepTwo}>
+                <lightning-button label="Back" title="Back" onclick={handleBack}></lightning-button>
+            </template>
+            <template if:true={isStepThree}>
+                <lightning-button label="Back" title="Back" onclick={handleBackToStep2}></lightning-button>
+            </template>
+        </div>
+        <div>
+            <lightning-button label="Cancel" title="Cancel" onclick={handleClose} class="slds-m-right_small"></lightning-button>
+            
+            <template if:true={isStepOne}>
+                <lightning-button label="Next" title="Next" variant="brand" disabled={isNextDisabled} onclick={handleNext}></lightning-button>
+            </template>
+            
+            <template if:true={isStepTwo}>
+                <lightning-button label="Next" title="Next" variant="brand" disabled={isStep2NextDisabled} onclick={handleNextToStep3}></lightning-button>
+            </template>
+
+            <template if:true={isStepThree}>
+                <lightning-button label="Create" title="Create Records" variant="brand" disabled={isCreating} onclick={handleCreate}></lightning-button>
+            </template>
+        </div>
+    </div>
+</template>

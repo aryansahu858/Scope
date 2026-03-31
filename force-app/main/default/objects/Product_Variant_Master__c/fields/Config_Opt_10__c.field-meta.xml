@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Config_Opt_10__c</fullName>
+    <label>Config Opt 10</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Indian Plug</fullName><default>true</default><label>Indian Plug</label></value>
+            <value><fullName>Universal Plug</fullName><default>false</default><label>Universal Plug</label></value>
+            
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Execution_Stage__c</fullName>
+    <label>Execution Stage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Execution_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Indent Pending</fullName>
+                <default>false</default>
+                <label>Indent Pending</label>
+            </value>
+            <value>
+                <fullName>Participation Decision</fullName>
+                <default>false</default>
+                <label>Participation Decision</label>
+            </value>
+            <value>
+                <fullName>Offer Prep</fullName>
+                <default>false</default>
+                <label>Offer Prep</label>
+            </value>
+            <value>
+                <fullName>Follow Up</fullName>
+                <default>false</default>
+                <label>Follow Up</label>
+            </value>
+            <value>
+                <fullName>Nego/RA</fullName>
+                <default>false</default>
+                <label>Nego/RA</label>
+            </value>
+            <value>
+                <fullName>Tender Receipt</fullName>
+                <default>false</default>
+                <label>Tender Receipt</label>
+            </value>
+            <value>
+                <fullName>Offer Prep &amp; Submission</fullName>
+                <default>false</default>
+                <label>Offer Prep &amp; Submission</label>
+            </value>
+            <value>
+                <fullName>Techno-Com. Evaluation</fullName>
+                <default>false</default>
+                <label>Techno-Com. Evaluation</label>
+            </value>
+            <value>
+                <fullName>Price Evaluation</fullName>
+                <default>false</default>
+                <label>Price Evaluation</label>
+            </value>
+            <value>
+                <fullName>PO Awaited</fullName>
+                <default>false</default>
+                <label>PO Awaited</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <valueName>Indent Pending</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <valueName>Participation Decision</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <valueName>Offer Prep</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <valueName>Follow Up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>Nego/RA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Purchase Enquiry</controllingFieldValue>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>PO Awaited</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>Tender Receipt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>Offer Prep &amp; Submission</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>Techno-Com. Evaluation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tender</controllingFieldValue>
+            <valueName>Price Evaluation</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

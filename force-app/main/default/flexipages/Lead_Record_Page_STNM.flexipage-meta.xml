@@ -359,7 +359,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Address__c</fieldItem>
                 <identifier>RecordAddress_cField</identifier>
@@ -435,7 +435,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Business_Unit__c</fieldItem>
                 <identifier>RecordBusiness_Unit_cField2</identifier>
