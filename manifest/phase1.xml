@@ -47,6 +47,14 @@
 		<members>Quote_Line_Item_Record_Page_STNM</members>
 		<name>FlexiPage</name>
 	</types>
+	<types>
+		<members>Lead_Stage</members>
+		<members>Opportunity_Sales_Path_EPC_Process</members>
+		<members>Opportunity_Sales_Path_Pre_Sal_Process</members>
+		<members>Order</members>
+		<members>Quote</members>
+		<name>PathAssistant</name>
+	</types>
     <types>
 		<members>CalculateParentCLV</members>
 		<members>CalculateParentCLV_Test</members>
