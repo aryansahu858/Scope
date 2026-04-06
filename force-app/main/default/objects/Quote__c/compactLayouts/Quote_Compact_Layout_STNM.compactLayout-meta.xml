@@ -7,6 +7,5 @@
     <fields>Quote_Date__c</fields>
     <fields>Opportunity_Name__c</fields>
     <fields>Account_Name__c</fields>
-    <fields>Grand_Total__c</fields>
     <label>Quote Compact Layout STNM</label>
 </CompactLayout>

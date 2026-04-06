@@ -3,69 +3,122 @@
  * Provides AuraEnabled methods to fetch Product__c records
  * with optional search/filter support, variant pricing, 
  * and record-level association.
- *
- * @author       Aryan Sahu
- * @version      1.1
  */
-public with sharing class ProductController {
+public class ProductController {
 
     private static final Integer DEFAULT_LIMIT  = 50;
     private static final Integer RELATED_LIMIT  = 5;
 
-    // ENHANCEMENT 1: Filter by Quote's Price Book
+
     @AuraEnabled(cacheable=true)
     public static List<Product__c> getProducts(String searchTerm, Integer limitSize, Id quoteId) {
-
-         System.debug(searchTerm);
-          System.debug(limitSize);
-           System.debug(quoteId);
-
         try {
-            
-            // 1. Fetch Price Book from Quote
-            Quote__c quoteRec = [SELECT PriceBook__c FROM Quote__c WHERE Id = :quoteId LIMIT 1];
-            System.debug(quoteRec);
+            // Fetch Quote
+            List<Quote__c> quotes = [
+                SELECT PriceBook__c, Opportunity_Name__c
+                FROM Quote__c 
+                WHERE Id = :quoteId 
+                LIMIT 1
+            ];
+
+            if (quotes.isEmpty()) {
+                throw new AuraHandledException('Quote not found.');
+            }
+
+            Quote__c quoteRec = quotes[0];
+
             if (quoteRec.PriceBook__c == null) {
                 throw new AuraHandledException('No Price Book assigned to this Quote.');
             }
+
+            if (quoteRec.Opportunity_Name__c == null) {
+                throw new AuraHandledException('No Opportunity linked to this Quote.');
+            }
+
+            // Fetch Opportunity Currency safely
+            List<Opportunity__c> oppList = [
+                SELECT CurrencyIsoCode 
+                FROM Opportunity__c 
+                WHERE Id = :quoteRec.Opportunity_Name__c 
+                LIMIT 1
+            ];
+
+            if (oppList.isEmpty()) {
+                throw new AuraHandledException('Opportunity not found.');
+            }
+
+            Opportunity__c opp = oppList[0];
+
+            if (String.isBlank(opp.CurrencyIsoCode)) {
+                throw new AuraHandledException('Currency is not defined on the Opportunity.');
+            }
+
+            String oppCurrency = opp.CurrencyIsoCode;
+
             Id priceBookId = quoteRec.PriceBook__c;
 
-            System.debug(priceBookId);
+            Integer queryLimit = (limitSize != null && limitSize > 0) 
+                ? limitSize 
+                : DEFAULT_LIMIT;
 
-            //  return [
-            //     SELECT Id, Name, Product_Code__c, Product_Family__c, Product_Description__c
-            //     FROM Product__c
-            // ];
-
-            Integer queryLimit = (limitSize != null && limitSize > 0) ? limitSize : DEFAULT_LIMIT;
             String searchKey = String.isNotBlank(searchTerm) 
                 ? '%' + String.escapeSingleQuotes(searchTerm.trim()) + '%' 
                 : '%';
 
-            // // 2. Query Products filtered by Price Book Entry junction
-            return [
+            // Fetch products
+            List<Product__c> products = [
                 SELECT Id, Name, Product_Code__c, Product_Family__c, Product_Description__c
                 FROM Product__c
                 WHERE (Name LIKE :searchKey OR Product_Code__c LIKE :searchKey)
-                  AND Id IN (SELECT Product__c FROM Price_Book_Entry__c WHERE Price_Book__c = :priceBookId)
+                AND Id IN (
+                    SELECT Product__c 
+                    FROM Price_Book_Entry__c 
+                    WHERE Price_Book__c = :priceBookId
+                        AND CurrencyIsoCode = :oppCurrency
+                        AND List_Price__c != null
+                )
                 ORDER BY Name ASC
                 LIMIT :queryLimit
             ];
+
+            if (products.isEmpty()) {
+                throw new AuraHandledException(
+                    'No products available for the selected Price Book and Currency.'
+                );
+            }
+
+            return products;
+
+        } catch (AuraHandledException ahe) {
+            throw ahe;
         } catch (Exception ex) {
             throw new AuraHandledException('Unable to fetch products: ' + ex.getMessage());
         }
     }
 
+    // ENHANCEMENT 3: Fetch Existing Data with Variant Configs and Pricing
     @AuraEnabled(cacheable=true)
     public static List<Quote_Line_Item__c> getRelatedQuoteProducts(Id recordId) {
         try {
             return [
-                SELECT Id, Product__r.Name, Product__c, Quantity__c, Sales_Price__c, Product__r.Product_Family__c
+                SELECT Id, Product__c, Product__r.Name, Product__r.Product_Family__c,
+                       Product_Variant_Master__c,
+                       Product_Variant_Master__r.Config_Opt_1__c,
+                       Product_Variant_Master__r.Config_Opt_2__c,
+                       Product_Variant_Master__r.Config_Opt_3__c,
+                       Product_Variant_Master__r.Config_Opt_4__c,
+                       Product_Variant_Master__r.Config_Opt_5__c,
+                       Product_Variant_Master__r.Config_Opt_6__c,
+                       Product_Variant_Master__r.Config_Opt_7__c,
+                       Product_Variant_Master__r.Config_Opt_8__c,
+                       Product_Variant_Master__r.Config_Opt_9__c,
+                       Product_Variant_Master__r.Config_Opt_10__c,
+                       List_Price__c, Quantity__c, Discount_Percent__c, Uplift_Percent__c, GST_Percent__c
                 FROM Quote_Line_Item__c
                 WHERE Quote__c = :recordId
             ];
         } catch (Exception ex) {
-            throw new AuraHandledException('Unable to fetch products: ' + ex.getMessage());
+            throw new AuraHandledException('Unable to fetch existing quote products: ' + ex.getMessage());
         }
     }
 
@@ -80,18 +133,6 @@ public with sharing class ProductController {
             ];
         } catch (Exception ex) {
             throw new AuraHandledException('Unable to fetch related products: ' + ex.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void addProductsToRecord(Id recordId, List<Id> productIds) {
-        try {
-            if (productIds == null || productIds.isEmpty()) {
-                throw new AuraHandledException('No products provided.');
-            }
-            System.debug('Adding products ' + productIds + ' to record ' + recordId);
-        } catch (Exception ex) {
-            throw new AuraHandledException('Failed to add products: ' + ex.getMessage());
         }
     }
 
@@ -120,7 +161,6 @@ public with sharing class ProductController {
     @AuraEnabled
     public static PricingContext validateAndConvertPrice(Id quoteId, Id productId, Decimal rspValue, String rspCurrency) {
         PricingContext result = new PricingContext();
-        
         try {
             Quote__c q = [SELECT Opportunity_Name__r.CurrencyIsoCode FROM Quote__c WHERE Id = :quoteId LIMIT 1];
             if (q.Opportunity_Name__c == null || q.Opportunity_Name__r.CurrencyIsoCode == null) {
@@ -130,10 +170,8 @@ public with sharing class ProductController {
             result.currencyCode = q.Opportunity_Name__r.CurrencyIsoCode;
             
             Integer pbeCount = [
-                SELECT COUNT() 
-                FROM Price_Book_Entry__c 
-                WHERE Product__c = :productId 
-                AND CurrencyIsoCode = :result.currencyCode
+                SELECT COUNT() FROM Price_Book_Entry__c 
+                WHERE Product__c = :productId AND CurrencyIsoCode = :result.currencyCode
             ];
             
             result.isValidPriceBook = (pbeCount > 0);
@@ -147,7 +185,6 @@ public with sharing class ProductController {
                 for(SObject ct : Database.query('SELECT IsoCode, ConversionRate FROM CurrencyType WHERE IsActive = true')) {
                     rates.put((String)ct.get('IsoCode'), (Decimal)ct.get('ConversionRate'));
                 }
-                
                 Decimal fromRate = rates.get(rspCurrency);
                 Decimal toRate = rates.get(result.currencyCode);
                 
@@ -159,43 +196,57 @@ public with sharing class ProductController {
             } else {
                 result.convertedPrice = rspValue;
             }
-            
         } catch(Exception e) {
             result.errorMessage = 'Pricing Validation Error: ' + e.getMessage();
         }
-        
         return result;
     }
 
-    // ENHANCEMENT 4: Payload matches Step 3 matrix
-    @AuraEnabled
-    public static void createQuoteLineItems(List<Map<String, Object>> lineItems) {
+    // ENHANCEMENT 2 & 3: Upsert Logic handling Variant mapping and Existing records
+   @AuraEnabled
+    public static void upsertQuoteLineItems(List<Map<String, Object>> lineItems) {
         try {
-            List<Quote_Line_Item__c> recordsToInsert = new List<Quote_Line_Item__c>();
-            
+            List<Quote_Line_Item__c> recordsToUpsert = new List<Quote_Line_Item__c>();
+
             for (Map<String, Object> line : lineItems) {
                 Quote_Line_Item__c qli = new Quote_Line_Item__c();
-                qli.Quote__c = (Id) line.get('quoteId');
-                qli.Product__c = (Id) line.get('productId');
-                qli.List_Price__c = Decimal.valueOf(String.valueOf(line.get('unitPrice')));
-                qli.Quantity__c = Decimal.valueOf(String.valueOf(line.get('quantity')));
-                qli.Discount_Percent__c = Decimal.valueOf(String.valueOf(line.get('discountPct')));
-                //qli.Discount_Amount__c = Decimal.valueOf(String.valueOf(line.get('discountAmt')));
-                qli.Uplift_Percent__c = Decimal.valueOf(String.valueOf(line.get('upliftPct')));
-                //qli.Uplift_Amount__c = Decimal.valueOf(String.valueOf(line.get('upliftAmt')));
-                //qli.Final_Unit_Price__c = Decimal.valueOf(String.valueOf(line.get('finalUnitPrice')));
-                qli.Total_Price__c = Decimal.valueOf(String.valueOf(line.get('totalPrice')));
-                qli.GST_Percent__c = Decimal.valueOf(String.valueOf(line.get('gstPct')));
-                //qli.GST_Amount__c = Decimal.valueOf(String.valueOf(line.get('gstAmt')));
-                //qli.Total_Line_Amount__c = Decimal.valueOf(String.valueOf(line.get('totalLineAmount')));
-                recordsToInsert.add(qli);
+
+                if (line.get('qliId') != null) {
+                    qli.Id = Id.valueOf(String.valueOf(line.get('qliId')));
+                }
+
+                
+                if (qli.Id == null && line.get('quoteId') != null && String.isNotBlank(String.valueOf(line.get('quoteId')))) {
+                    qli.Quote__c = Id.valueOf(String.valueOf(line.get('quoteId')).trim());
+                }
+
+                if (line.get('productId') != null && String.isNotBlank(String.valueOf(line.get('productId')))) {
+                    qli.Product__c = Id.valueOf(String.valueOf(line.get('productId')).trim());
+                }
+
+                if (line.get('variantId') != null && String.isNotBlank(String.valueOf(line.get('variantId')))) {
+                    qli.Product_Variant_Master__c = Id.valueOf(String.valueOf(line.get('variantId')).trim());
+                }
+
+
+                qli.List_Price__c = (line.get('unitPrice') != null) ? Decimal.valueOf(String.valueOf(line.get('unitPrice'))) : null;
+                qli.Sales_Price__c = (line.get('unitPrice') != null) ? Decimal.valueOf(String.valueOf(line.get('unitPrice'))) : null;
+                qli.Quantity__c = (line.get('quantity') != null) ? Decimal.valueOf(String.valueOf(line.get('quantity'))) : null;
+                qli.Discount_Percent__c = (line.get('discountPct') != null) ? Decimal.valueOf(String.valueOf(line.get('discountPct'))) : null;
+                qli.Uplift_Percent__c = (line.get('upliftPct') != null) ? Decimal.valueOf(String.valueOf(line.get('upliftPct'))) : null;
+                qli.GST_Percent__c = (line.get('gstPct') != null) ? Decimal.valueOf(String.valueOf(line.get('gstPct'))) : null;
+
+                recordsToUpsert.add(qli);
+
             }
-            
-            if (!recordsToInsert.isEmpty()) {
-                insert recordsToInsert;
+
+            if (!recordsToUpsert.isEmpty()) {
+                Database.upsert(recordsToUpsert, false);
             }
+
         } catch (Exception e) {
-            throw new AuraHandledException('Error creating Quote Line Items: ' + e.getMessage());
+            throw new AuraHandledException('Error upserting Quote Line Items: ' + e.getMessage());
         }
     }
+
 }

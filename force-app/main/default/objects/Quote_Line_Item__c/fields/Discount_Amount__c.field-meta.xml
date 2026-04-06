@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Discount_Amount__c</fullName>
-    <formula>Sales_Price__c * Discount_Percent__c</formula>
+    <formula>Sales_Price__c * Discount_Percent__c *  Quantity__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Discount Amount</label>
     <precision>18</precision>

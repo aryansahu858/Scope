@@ -145,7 +145,7 @@
 		<members>Formula</members>
 		<name>Settings</name>
 	</types>
-		<types>
+	<types>
 		<members>Admin</members>
 		<members>Platform User</members>
 		<members>PreSales User</members>
