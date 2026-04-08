@@ -63,7 +63,7 @@ public with sharing class LeadConverterController {
             
             // Re-fetch the Lead to ensure we have the most recent data for backend mapping
             Lead__c sourceLead = [
-                SELECT Title__c, Email__c, Phone__c, Lead_Source__c, Location__c,Territory_Region__c,
+                SELECT Title__c, Email__c, Phone__c, Lead_Source__c, Location__c,Territory_Region__c, OwnerId,
                        Address__Street__s, Address__City__s, Address__StateCode__s, Address__PostalCode__s, Address__CountryCode__s,Business_Unit__c
                 FROM Lead__c 
                 WHERE Id = :leadId 
@@ -83,7 +83,8 @@ public with sharing class LeadConverterController {
                     BillingStateCode   = sourceLead.Address__StateCode__s,
                     BillingPostalCode  = sourceLead.Address__PostalCode__s,
                     BillingCountryCode = sourceLead.Address__CountryCode__s,
-                    Location_Site__c   = sourceLead.Location__c
+                    Location_Site__c   = sourceLead.Location__c,
+                    OwnerId           = sourceLead.OwnerId
                 );
                 insert newAcc; 
                 finalAccountId = newAcc.Id;
@@ -109,7 +110,8 @@ public with sharing class LeadConverterController {
                     MailingStateCode   = sourceLead.Address__StateCode__s,
                     MailingPostalCode  = sourceLead.Address__PostalCode__s,
                     MailingCountryCode = sourceLead.Address__CountryCode__s,
-                    Location_Site__c   = sourceLead.Location__c
+                    Location_Site__c   = sourceLead.Location__c,
+                    OwnerId           = sourceLead.OwnerId
                 );
                 insert newCon;
                 finalContactId = newCon.Id;
@@ -140,7 +142,8 @@ public with sharing class LeadConverterController {
                     Account_Name__c  = finalAccountId,
                     Lead_Source__c   = sourceLead.Lead_Source__c,
                     Opportunity_Region__c = sourceLead.Territory_Region__c, //CH01
-                    Business_Unit__c   = sourceLead.Business_Unit__c //CH02
+                    Business_Unit__c   = sourceLead.Business_Unit__c, //CH02
+                    Opportunity_Owner_Field__c  = sourceLead.OwnerId
                 );
                 insert newOpp;
                 oppId = newOpp.Id;
@@ -152,9 +155,10 @@ public with sharing class LeadConverterController {
             Lead__c leadToDelete = new Lead__c(Id = leadId);
             delete leadToDelete;
 
-            // Success Response
+            // --- SUCCESS RESPONSE ---
             response.put('success', true);
             response.put('accountId', finalAccountId);
+            response.put('opportunityId', oppId);
 
         } catch (Exception e) {
             // Rollback to Savepoint in case of any error within the transaction

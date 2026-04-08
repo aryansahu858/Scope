@@ -472,15 +472,26 @@ export default class LeadConverter extends NavigationMixin(LightningElement) {
                     this.showToast('Success', 'Lead Converted Successfully', 'success');
                     this.isModalOpen = false;
 
-                    // Navigate to the newly created Account record after conversion.
-                    this[NavigationMixin.Navigate]({
-                        type: 'standard__recordPage',
-                        attributes: {
-                            recordId     : result.accountId,
-                            objectApiName: 'Account',
-                            actionName   : 'view'
-                        }
-                    });
+                    // Navigate based on Opportunity creation
+                    if (result.opportunityId) {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__recordPage',
+                            attributes: {
+                                recordId: result.opportunityId,
+                                objectApiName: 'Opportunity__c',
+                                actionName: 'view'
+                            }
+                        });
+                    } else {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__recordPage',
+                            attributes: {
+                                recordId: result.accountId,
+                                objectApiName: 'Account',
+                                actionName: 'view'
+                            }
+                        });
+                    }
                 } else {
                     // Apex returned a handled error (e.g. duplicate detection).
                     // Display inline without closing the modal so the user can correct it.
