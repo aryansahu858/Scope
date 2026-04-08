@@ -53,6 +53,8 @@ export default class EventGeotag extends LightningElement {
             
             // Refreshes the record page so the new values appear immediately
             notifyRecordUpdateAvailable([{recordId: this.recordId}]);
+
+            window.location.reload();
         })
         .catch(error => {
             let message = 'Unknown error';
